@@ -39,3 +39,20 @@ There are a couple of additional things that we would like to see in your submis
 3. Improve the folder structure of the frontend application how you see fit. (It's intentionally not great)
 4. Add the custom `edit.svg` from the `public` folder as an icon to launch editing the review.
 5. Add a unit testing framework of your choice, and some unit tests around the more complex areas of your code.
+
+## Notes
+
+- I would like to use some tool to generate types from the graphql schema
+
+## Fake US
+
+The ideia is to simulate a real project. The ideal will be to create and merge each one in separate branchs
+
+MOV-001 create the movies page
+MOV-002 create the movie page
+MOV-003 create the moview reviews page
+MOV-004 create the edit review page
+
+## Design
+
+Inspired in https://miro.medium.com/max/1400/1*VskaAyET5SNBt6xo4y96mA.png
