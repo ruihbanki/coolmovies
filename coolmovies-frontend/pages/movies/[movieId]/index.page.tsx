@@ -7,10 +7,10 @@ const Movie: NextPage = () => {
   const { movie } = useMovie();
 
   return (
-    <MainLayout>
+    <MainLayout contentBackgroundImage={movie?.imgUrl}>
       <Typography
         component="h1"
-        variant="h4"
+        variant="h3"
         color="common.white"
         fontWeight={300}
         sx={{ m: 0 }}

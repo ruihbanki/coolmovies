@@ -7,6 +7,7 @@ export const movieQuery = gql`
       nodeId
       title
       releaseDate
+      imgUrl
       userByUserCreatorId {
         id
         name

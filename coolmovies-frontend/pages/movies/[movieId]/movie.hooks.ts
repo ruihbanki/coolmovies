@@ -20,6 +20,12 @@ export const useMovie = () => {
     );
   }, [dispatch, movieId]);
 
+  useEffect(() => {
+    return () => {
+      dispatch(movieActions.clearData());
+    };
+  }, [dispatch]);
+
   return {
     movie,
   };

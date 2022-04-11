@@ -3,12 +3,16 @@ import MainLayoutHeader from "./header";
 
 interface MainLayout {
   children?: React.ReactNode;
+  contentBackgroundImage?: string;
 }
 
 const MainLayout = (props: MainLayout) => {
-  const { children } = props;
+  const { children, contentBackgroundImage } = props;
   return (
-    <StyledRoot className={classes.root}>
+    <StyledRoot
+      className={classes.root}
+      contentBackgroundImage={contentBackgroundImage}
+    >
       <div className={classes.header}>
         <MainLayoutHeader />
       </div>
