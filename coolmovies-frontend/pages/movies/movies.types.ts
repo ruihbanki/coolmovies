@@ -1,5 +1,6 @@
 export interface Movie {
   id: string;
+  nodeId: string;
   imgUrl: string;
   title: string;
   releaseDate: string;

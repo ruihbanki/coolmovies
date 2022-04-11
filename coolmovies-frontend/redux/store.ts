@@ -3,9 +3,11 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { combineEpics, createEpicMiddleware } from "redux-observable";
 import { CreateStoreOptions } from "./types";
 import { moviesEpics } from "../pages/movies/movies.epics";
+import { movieEpics } from "../pages/movies/[movieId]/movie.epics";
 import moviesReducer from "../pages/movies/movies.slice";
+import movieReducer from "../pages/movies/[movieId]/movie.slice";
 
-const rootEpic = combineEpics(moviesEpics);
+const rootEpic = combineEpics(moviesEpics, movieEpics);
 
 export const createStore = ({ epicDependencies }: CreateStoreOptions) => {
   const epicMiddleware = createEpicMiddleware({
@@ -17,6 +19,7 @@ export const createStore = ({ epicDependencies }: CreateStoreOptions) => {
       getDefaultMiddleware().concat(epicMiddleware),
     reducer: {
       movies: moviesReducer,
+      movie: movieReducer,
     },
   });
 

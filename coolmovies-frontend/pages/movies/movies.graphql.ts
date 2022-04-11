@@ -5,6 +5,7 @@ export const moviesQuery = gql`
     allMovies {
       nodes {
         id
+        nodeId
         imgUrl
         title
         releaseDate
