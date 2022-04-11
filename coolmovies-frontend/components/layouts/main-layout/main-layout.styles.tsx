@@ -35,7 +35,7 @@ export const StyledRoot = styled("div")<{ contentBackgroundImage?: string }>(
         backgroundSize: "cover",
         backgroundPosition: "center",
         opacity: 0.2,
-        filter: "blur(10px) grayscale(1)",
+        filter: "blur(10px) grayscale(0.5)",
         maskImage: "linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0))",
       },
     },

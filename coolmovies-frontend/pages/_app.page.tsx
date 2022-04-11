@@ -1,13 +1,13 @@
 import React, { FC, useState } from "react";
-import type { AppProps } from "next/app";
 import { Provider as ReduxProvider } from "react-redux";
-import Head from "next/head";
 import { EnhancedStore } from "@reduxjs/toolkit";
 import { ApolloClient, InMemoryCache } from "@apollo/client";
+import type { AppProps } from "next/app";
+import Head from "next/head";
+import { createTheme, CssBaseline } from "@mui/material";
+import { ThemeProvider } from "@emotion/react";
 import { createStore } from "../redux";
 import "../styles/globals.css";
-import { createTheme } from "@mui/material";
-import { ThemeProvider } from "@emotion/react";
 
 const theme = createTheme({
   palette: {
@@ -42,6 +42,7 @@ const App: FC<AppProps> = ({ Component, pageProps }) => {
       </Head>
       <ReduxProvider store={store}>
         <ThemeProvider theme={theme}>
+          <CssBaseline />
           <Component {...pageProps} />
         </ThemeProvider>
       </ReduxProvider>
