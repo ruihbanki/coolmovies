@@ -17,6 +17,7 @@ export const StyledRoot = styled("div")(({ theme }) => ({
   },
   [`& > .${classes.content}`]: {
     flex: 1,
+    padding: 40,
     background: theme.palette.grey[900],
   },
 }));

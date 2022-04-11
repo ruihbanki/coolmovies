@@ -7,6 +7,7 @@ export const moviesQuery = gql`
         id
         imgUrl
         title
+        releaseDate
       }
     }
   }
