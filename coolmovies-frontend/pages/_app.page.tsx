@@ -1,7 +1,7 @@
 import React, { FC, useState } from "react";
 import { Provider as ReduxProvider } from "react-redux";
 import { EnhancedStore } from "@reduxjs/toolkit";
-import { ApolloClient, InMemoryCache } from "@apollo/client";
+import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import { createTheme, CssBaseline } from "@mui/material";
@@ -18,14 +18,15 @@ const theme = createTheme({
   },
 });
 
+const client = new ApolloClient({
+  cache: new InMemoryCache(),
+  uri: "/graphql",
+});
+
 const App: FC<AppProps> = ({ Component, pageProps }) => {
   const [store, setStore] = useState<EnhancedStore | null>(null);
 
   React.useEffect(() => {
-    const client = new ApolloClient({
-      cache: new InMemoryCache(),
-      uri: "/graphql",
-    });
     const store = createStore({ epicDependencies: { client } });
     setStore(store);
   }, []);
@@ -41,10 +42,12 @@ const App: FC<AppProps> = ({ Component, pageProps }) => {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
       <ReduxProvider store={store}>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <Component {...pageProps} />
-        </ThemeProvider>
+        <ApolloProvider client={client}>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <Component {...pageProps} />
+          </ThemeProvider>
+        </ApolloProvider>
       </ReduxProvider>
     </>
   );

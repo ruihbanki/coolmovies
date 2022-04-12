@@ -1,6 +1,6 @@
 overwrite: true
 schema: "http://localhost:5001/graphql"
-documents: "pages/**/*.graphql"
+documents: "**/*.graphql"
 generates:
   graphql-generated/types.ts:
     - typescript

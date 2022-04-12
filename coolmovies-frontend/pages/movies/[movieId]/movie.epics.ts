@@ -4,6 +4,9 @@ import { filter, switchMap } from "rxjs/operators";
 import { RootState } from "../../../redux/store";
 import { EpicDependencies } from "../../../redux/types";
 import {
+  CreateMovieReviewDocument,
+  CreateMovieReviewMutationFn,
+  CreateMovieReviewMutationVariables,
   MovieAndReviewsDocument,
   MovieAndReviewsQuery,
 } from "./movie.generated";
@@ -33,4 +36,33 @@ export const fetchMoviesEpic: Epic = (
     })
   );
 
-export const movieEpics = combineEpics(fetchMoviesEpic);
+export const createMovieReviewEpic: Epic = (
+  action$: Observable<MovieAction["createReview"]>,
+  state$: StateObservable<RootState>,
+  { client }: EpicDependencies
+) =>
+  action$.pipe(
+    filter(movieActions.createReview.match),
+    switchMap(async (action) => {
+      try {
+        const result = await client.mutate<
+          CreateMovieReviewMutationFn,
+          CreateMovieReviewMutationVariables
+        >({
+          mutation: CreateMovieReviewDocument,
+          variables: {
+            input: {
+              movieReview: action.payload.review,
+            },
+          },
+        });
+        // return movieActions.fetchSuccess({
+        //   data: result.data,
+        // });
+      } catch (err: any) {
+        return movieActions.fetchError(err.message);
+      }
+    })
+  );
+
+export const movieEpics = combineEpics(fetchMoviesEpic, createMovieReviewEpic);

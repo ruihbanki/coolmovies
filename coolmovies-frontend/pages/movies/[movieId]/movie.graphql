@@ -30,3 +30,15 @@ query MovieAndReviews($nodeId: ID!) {
     }
   }
 }
+
+mutation CreateMovieReview($input: CreateMovieReviewInput!) {
+  createMovieReview(input: $input) {
+    clientMutationId
+  }
+}
+
+mutation UpdateMovieReview($input: UpdateMovieReviewInput!) {
+  updateMovieReview(input: $input) {
+    clientMutationId
+  }
+}

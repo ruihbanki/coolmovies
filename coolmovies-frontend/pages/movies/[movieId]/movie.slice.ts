@@ -1,19 +1,21 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { MovieReviewInput } from "../../../graphql-generated/types";
 import { MovieAndReviews } from "./movie.types";
 
-interface MoviesState {
+interface MovieState {
   movie?: MovieAndReviews;
   error?: string;
+  activeMovieReviewId?: string;
 }
 
-const initialState: MoviesState = {};
+const initialState: MovieState = {};
 
 export const slice = createSlice({
   initialState,
   name: "movie",
   reducers: {
     clearData: (state) => {
-      state.movie = undefined;
+      state = initialState;
     },
     fetch: (state, action: PayloadAction<{ nodeId: string }>) => {},
     fetchSuccess: (state, action: PayloadAction<{ data: MovieAndReviews }>) => {
@@ -21,6 +23,22 @@ export const slice = createSlice({
     },
     fetchError: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
+    },
+    setActiveMovieReviewId: (
+      state,
+      action: PayloadAction<string | undefined>
+    ) => {
+      state.activeMovieReviewId = action.payload;
+    },
+    createReview: (
+      state,
+      action: PayloadAction<{ review: MovieReviewInput }>
+    ) => {},
+    createReviewSuccess: (
+      state,
+      action: PayloadAction<{ review: MovieReviewInput }>
+    ) => {
+      alert(1111);
     },
   },
 });

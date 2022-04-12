@@ -13,10 +13,10 @@ const MovieCard = (props: MovieCard) => {
   return (
     <StyledRoot className={classes.root}>
       <div className={classes.image}>
-        <Link href={`/movies/${movie.nodeId}`}>
+        <Link href={`/movies/${movie?.nodeId}`}>
           <a>
             <Image
-              src={movie.imgUrl}
+              src={movie?.imgUrl!}
               width={200}
               height={300}
               alt="Movie image"
@@ -26,12 +26,12 @@ const MovieCard = (props: MovieCard) => {
       </div>
       <div className={classes.title}>
         <Typography color="common.white" variant="body1">
-          {movie.title}
+          {movie?.title}
         </Typography>
       </div>
       <div className={classes.date}>
         <Typography color="common.white" variant="body2" sx={{ opacity: 0.48 }}>
-          {movie.releaseDate}
+          {movie?.releaseDate}
         </Typography>
       </div>
     </StyledRoot>
