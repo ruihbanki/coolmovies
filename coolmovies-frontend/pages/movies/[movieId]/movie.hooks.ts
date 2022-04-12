@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { Review } from "../../../components/movies/review-dialog/review-dialog";
+import { useEffect } from "react";
+import { format } from "date-fns";
 import { MovieReviewInput } from "../../../graphql-generated/types";
 import { useAppDispatch, useAppSelector } from "../../../redux";
 import { movieActions } from "./movie.slice";
@@ -55,11 +55,16 @@ export const useMovie = () => {
 
   const reviewOpen = !!activeMovieReviewId;
 
+  const releaseDate = movie?.releaseDate
+    ? format(new Date(movie?.releaseDate! as string), "MM/dd/yyyy")
+    : "";
+
   return {
     addNewReview,
     closeReview,
     movie,
     reviewOpen,
     saveReview,
+    releaseDate,
   };
 };

@@ -1,7 +1,7 @@
 import { Typography, Grid, Box } from "@mui/material";
 import type { NextPage } from "next";
 import MainLayout from "../../components/layouts/main-layout/main-layout";
-import MovieCard from "../../components/movies/movie/movie-card";
+import MovieCard from "../../components/movies/movie-card/movie-card";
 import { useMovies } from "./movies.hooks";
 
 const Movies: NextPage = () => {

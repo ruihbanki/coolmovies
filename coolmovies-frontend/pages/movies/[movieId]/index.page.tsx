@@ -18,8 +18,14 @@ import { useMovie } from "./movie.hooks";
 import ReviewDialog from "../../../components/movies/review-dialog";
 
 const Movie: NextPage = () => {
-  const { addNewReview, closeReview, movie, reviewOpen, saveReview } =
-    useMovie();
+  const {
+    addNewReview,
+    closeReview,
+    movie,
+    reviewOpen,
+    saveReview,
+    releaseDate,
+  } = useMovie();
 
   if (!movie) {
     return null;
@@ -41,8 +47,11 @@ const Movie: NextPage = () => {
             <Typography variant="body2">
               Creator: {movie?.userByUserCreatorId?.name}
             </Typography>
-            <Typography variant="body2" mb={2}>
+            <Typography variant="body2">
               Director: {movie?.movieDirectorByMovieDirectorId?.name}
+            </Typography>
+            <Typography variant="body2" mb={2}>
+              Relase date: {releaseDate}
             </Typography>
           </Grid>
         </Grid>

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Typography } from "@mui/material";
+import { formatDistance } from "date-fns";
 import { Movie } from "../../../pages/movies/movies.types";
 import { classes, StyledRoot } from "./movie-card.styles";
 import Link from "next/link";
@@ -10,6 +11,12 @@ interface MovieCard {
 
 const MovieCard = (props: MovieCard) => {
   const { movie } = props;
+
+  const releaseDate = formatDistance(
+    new Date(),
+    new Date(movie?.releaseDate! as string)
+  );
+
   return (
     <StyledRoot className={classes.root}>
       <div className={classes.image}>
@@ -31,7 +38,7 @@ const MovieCard = (props: MovieCard) => {
       </div>
       <div className={classes.date}>
         <Typography color="common.white" variant="body2" sx={{ opacity: 0.48 }}>
-          {movie?.releaseDate}
+          {releaseDate}
         </Typography>
       </div>
     </StyledRoot>
