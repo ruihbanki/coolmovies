@@ -1,0 +1,32 @@
+query MovieAndReviews($nodeId: ID!) {
+  movie(nodeId: $nodeId) {
+    id
+    nodeId
+    title
+    releaseDate
+    imgUrl
+    userByUserCreatorId {
+      id
+      name
+    }
+    movieDirectorByMovieDirectorId {
+      id
+      name
+    }
+    movieReviewsByMovieId {
+      edges {
+        node {
+          id
+          movieId
+          title
+          body
+          rating
+          userByUserReviewerId {
+            id
+            name
+          }
+        }
+      }
+    }
+  }
+}
