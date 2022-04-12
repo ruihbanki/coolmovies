@@ -3,9 +3,11 @@ import { Observable } from "rxjs";
 import { filter, switchMap } from "rxjs/operators";
 import { RootState } from "../../../redux/store";
 import { EpicDependencies } from "../../../redux/types";
-import { movieQuery } from "./movie.graphql";
+import {
+  MovieAndReviewsDocument,
+  MovieAndReviewsQuery,
+} from "./movie.generated";
 import { movieActions, MovieAction } from "./movie.slice";
-import { MovieQuery } from "./movie.types";
 
 export const fetchMoviesEpic: Epic = (
   action$: Observable<MovieAction["fetch"]>,
@@ -16,10 +18,8 @@ export const fetchMoviesEpic: Epic = (
     filter(movieActions.fetch.match),
     switchMap(async (action) => {
       try {
-        console.log(action);
-
-        const result = await client.query<MovieQuery>({
-          query: movieQuery,
+        const result = await client.query<MovieAndReviewsQuery>({
+          query: MovieAndReviewsDocument,
           variables: {
             nodeId: action.payload.nodeId,
           },

@@ -21,7 +21,7 @@ const Movies: NextPage = () => {
       <Box mt={2}>
         <Grid container spacing={5}>
           {movies.map((movie) => (
-            <Grid key={movie.id} item flex="0 0 240px">
+            <Grid key={movie?.id} item flex="0 0 240px">
               <MovieCard movie={movie} />
             </Grid>
           ))}

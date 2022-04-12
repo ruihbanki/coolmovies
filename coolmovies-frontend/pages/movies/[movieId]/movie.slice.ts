@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Movie } from "./movie.types";
+import { MovieAndReviews } from "./movie.types";
 
 interface MoviesState {
-  movie?: Movie;
+  movie?: MovieAndReviews;
   error?: string;
 }
 
@@ -16,7 +16,7 @@ export const slice = createSlice({
       state.movie = undefined;
     },
     fetch: (state, action: PayloadAction<{ nodeId: string }>) => {},
-    fetchSuccess: (state, action: PayloadAction<{ data: Movie }>) => {
+    fetchSuccess: (state, action: PayloadAction<{ data: MovieAndReviews }>) => {
       state.movie = action.payload.data;
     },
     fetchError: (state, action: PayloadAction<string>) => {

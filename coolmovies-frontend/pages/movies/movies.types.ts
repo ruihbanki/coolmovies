@@ -1,13 +1,3 @@
-export interface Movie {
-  id: string;
-  nodeId: string;
-  imgUrl: string;
-  title: string;
-  releaseDate: string;
-}
+import { AllMoviesQuery } from "./movies.generated";
 
-export interface MoviesQuery {
-  allMovies: {
-    nodes: Movie[];
-  };
-}
+export type Movie = NonNullable<AllMoviesQuery["allMovies"]>["nodes"][number];

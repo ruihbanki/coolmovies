@@ -35,10 +35,10 @@ const Movie: NextPage = () => {
         </Grid>
         <Grid item>
           <Typography variant="body2">
-            Creator: {movie.userByUserCreatorId.name}
+            Creator: {movie?.userByUserCreatorId?.name}
           </Typography>
           <Typography variant="body2" mb={2}>
-            Director: {movie.movieDirectorByMovieDirectorId.name}
+            Director: {movie?.movieDirectorByMovieDirectorId?.name}
           </Typography>
         </Grid>
       </Grid>
@@ -56,7 +56,7 @@ const Movie: NextPage = () => {
       </Typography>
       <List>
         {movie?.movieReviewsByMovieId?.edges?.map(({ node }) => (
-          <ListItem key={node.id}>
+          <ListItem key={node?.id}>
             <ListItemAvatar>
               <Avatar
                 sx={{
@@ -77,12 +77,12 @@ const Movie: NextPage = () => {
                     color="common.white"
                     mr={2}
                   >
-                    {node.title}
+                    {node?.title}
                   </Typography>
-                  <Rating value={node.rating} readOnly size="small" />
+                  <Rating value={node?.rating} readOnly size="small" />
                 </Box>
               }
-              secondary={node.body}
+              secondary={node?.body}
             />
           </ListItem>
         ))}
