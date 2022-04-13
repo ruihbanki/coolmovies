@@ -13,4 +13,13 @@ module.exports = {
     domains: ["upload.wikimedia.org", "images-na.ssl-images-amazon.com"],
   },
   pageExtensions: ["page.tsx"],
+  async redirects() {
+    return [
+      {
+        source: "/",
+        destination: "/movies",
+        permanent: true,
+      },
+    ];
+  },
 };
