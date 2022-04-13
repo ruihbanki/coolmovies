@@ -16,13 +16,14 @@ describe("Movies page", () => {
     cy.contains("Star Wars: A New Hope").should("exist");
   });
 
-  it.skip("should go to movie page when click in the movie image", () => {
+  it("should go to movie page when click in the movie image", () => {
     mountComponent();
     cy.contains("Rogue One: A Star Wars Story")
       .parent()
       .parent()
       .find("a")
       .click();
+    cy.location("pathname").should("be.equals", "/movies/node-1");
   });
 });
 
