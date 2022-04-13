@@ -33,11 +33,18 @@ const ReviewDialog = (props: ReviewDialogProps) => {
     form,
     onClose,
     open,
+    resetForm,
     saveReview,
   } = useReviewDialog(props);
 
   return (
-    <Dialog open={open} maxWidth="md" fullWidth disableScrollLock>
+    <Dialog
+      open={open}
+      maxWidth="md"
+      fullWidth
+      disableScrollLock
+      TransitionProps={{ onExit: resetForm }}
+    >
       <DialogTitle>Review</DialogTitle>
       <DialogContent>
         <Grid container spacing={2}>

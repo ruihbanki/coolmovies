@@ -1,10 +1,16 @@
 import React, { useState } from "react";
 import { Review, ReviewDialogProps } from "./review-dialog";
 
+const EMPTY_REVIEW = {
+  rating: 0,
+  title: "",
+  body: "",
+};
+
 export const useReviewDialog = (props: ReviewDialogProps) => {
   const { review, onClose, open, onSave } = props;
 
-  const [form, setForm] = useState<Review>(review || {});
+  const [form, setForm] = useState<Review>(review || EMPTY_REVIEW);
 
   const saveReview = () => {
     onSave(form);
@@ -13,7 +19,7 @@ export const useReviewDialog = (props: ReviewDialogProps) => {
   const changeRating = (_e: any, value: number | null) => {
     setForm((prev) => ({
       ...prev,
-      rating: value || undefined,
+      rating: value || 0,
     }));
   };
 
@@ -31,6 +37,10 @@ export const useReviewDialog = (props: ReviewDialogProps) => {
     }));
   };
 
+  const resetForm = () => {
+    setForm(EMPTY_REVIEW);
+  };
+
   return {
     changeBody,
     changeRating,
@@ -38,7 +48,7 @@ export const useReviewDialog = (props: ReviewDialogProps) => {
     form,
     onClose,
     open,
-    review,
+    resetForm,
     saveReview,
   };
 };
