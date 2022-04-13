@@ -17,7 +17,7 @@ import Image from "next/image";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import MainLayout from "../../../components/layouts/main-layout";
 import ReviewDialog from "../../../components/movies/review-dialog";
-import EditSvg from "../../../public/edit.svg";
+import EditSvg from "../../../../public/edit.svg";
 import { useMovie } from "./movie.hooks";
 
 const Movie: NextPage = () => {

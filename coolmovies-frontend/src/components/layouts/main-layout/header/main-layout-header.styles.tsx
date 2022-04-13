@@ -1,5 +1,5 @@
-import { lighten, styled } from "@mui/material/styles";
 import { generateUtilityClasses } from "@mui/base";
+import { lighten, styled } from "@mui/material";
 
 export const classes = generateUtilityClasses("MainLayoutHeader", [
   "root",

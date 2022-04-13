@@ -1,0 +1,15 @@
+{
+  "retries": {
+    "runMode": 3,
+    "openMode": 0
+  },
+  "defaultCommandTimeout": 10000,
+  "component": {
+    "componentFolder": "src",
+    "testFiles": "**/*.spec.{tsx,ts}",
+    "viewportHeight": 800,
+    "viewportWidth": 1280,
+    "video": false,
+    "defaultCommandTimeout": 4000
+  }
+}

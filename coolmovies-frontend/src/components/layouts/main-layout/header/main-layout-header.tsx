@@ -11,7 +11,7 @@ const MainLayoutHeader = (props: MainLayoutHeaderProps) => {
         <Typography variant="body1">COOLMOVIES</Typography>
       </div>
       <div className={classes.search}>
-        <Search className={classes.searchIcon} />
+        {/* <Search className={classes.searchIcon} /> */}
         <Input
           type="text"
           className={classes.searchInput}

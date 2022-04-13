@@ -2,9 +2,9 @@ overwrite: true
 schema: "http://localhost:5001/graphql"
 documents: "**/*.graphql"
 generates:
-  graphql-generated/types.ts:
+  src/graphql-generated/types.ts:
     - typescript
-  graphql-generated/:
+  src/graphql-generated/:
     preset: near-operation-file
     presetConfig:
       extension: .generated.ts

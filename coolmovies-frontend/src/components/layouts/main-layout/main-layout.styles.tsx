@@ -1,5 +1,5 @@
-import { styled } from "@mui/material/styles";
 import { generateUtilityClasses } from "@mui/base";
+import { styled } from "@mui/system";
 
 export const classes = generateUtilityClasses("MainLayoutHeader", [
   "root",
