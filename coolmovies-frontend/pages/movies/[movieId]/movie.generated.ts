@@ -3,6 +3,8 @@ import * as Types from '../../../graphql-generated/types';
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 const defaultOptions = {} as const;
+export type MovieReviewFragFragment = { __typename?: 'MovieReview', id: any, nodeId: string, movieId: any, title: string, body?: string | null, rating?: number | null, userByUserReviewerId?: { __typename?: 'User', id: any, name: string } | null };
+
 export type MovieAndReviewsQueryVariables = Types.Exact<{
   nodeId: Types.Scalars['ID'];
 }>;
@@ -24,7 +26,20 @@ export type UpdateMovieReviewMutationVariables = Types.Exact<{
 
 export type UpdateMovieReviewMutation = { __typename?: 'Mutation', updateMovieReview?: { __typename?: 'UpdateMovieReviewPayload', clientMutationId?: string | null, movieReview?: { __typename?: 'MovieReview', id: any, nodeId: string, movieId: any, title: string, body?: string | null, rating?: number | null, userByUserReviewerId?: { __typename?: 'User', id: any, name: string } | null } | null } | null };
 
-
+export const MovieReviewFragFragmentDoc = gql`
+    fragment MovieReviewFrag on MovieReview {
+  id
+  nodeId
+  movieId
+  title
+  body
+  rating
+  userByUserReviewerId {
+    id
+    name
+  }
+}
+    `;
 export const MovieAndReviewsDocument = gql`
     query MovieAndReviews($nodeId: ID!) {
   movie(nodeId: $nodeId) {
@@ -44,22 +59,13 @@ export const MovieAndReviewsDocument = gql`
     movieReviewsByMovieId(orderBy: RATING_DESC) {
       edges {
         node {
-          id
-          nodeId
-          movieId
-          title
-          body
-          rating
-          userByUserReviewerId {
-            id
-            name
-          }
+          ...MovieReviewFrag
         }
       }
     }
   }
 }
-    `;
+    ${MovieReviewFragFragmentDoc}`;
 
 /**
  * __useMovieAndReviewsQuery__
@@ -93,20 +99,11 @@ export const CreateMovieReviewDocument = gql`
   createMovieReview(input: $input) {
     clientMutationId
     movieReview {
-      id
-      nodeId
-      movieId
-      title
-      body
-      rating
-      userByUserReviewerId {
-        id
-        name
-      }
+      ...MovieReviewFrag
     }
   }
 }
-    `;
+    ${MovieReviewFragFragmentDoc}`;
 export type CreateMovieReviewMutationFn = Apollo.MutationFunction<CreateMovieReviewMutation, CreateMovieReviewMutationVariables>;
 
 /**
@@ -138,20 +135,11 @@ export const UpdateMovieReviewDocument = gql`
   updateMovieReview(input: $input) {
     clientMutationId
     movieReview {
-      id
-      nodeId
-      movieId
-      title
-      body
-      rating
-      userByUserReviewerId {
-        id
-        name
-      }
+      ...MovieReviewFrag
     }
   }
 }
-    `;
+    ${MovieReviewFragFragmentDoc}`;
 export type UpdateMovieReviewMutationFn = Apollo.MutationFunction<UpdateMovieReviewMutation, UpdateMovieReviewMutationVariables>;
 
 /**

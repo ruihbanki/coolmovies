@@ -1,3 +1,16 @@
+fragment MovieReviewFrag on MovieReview {
+  id
+  nodeId
+  movieId
+  title
+  body
+  rating
+  userByUserReviewerId {
+    id
+    name
+  }
+}
+
 query MovieAndReviews($nodeId: ID!) {
   movie(nodeId: $nodeId) {
     id
@@ -16,16 +29,7 @@ query MovieAndReviews($nodeId: ID!) {
     movieReviewsByMovieId(orderBy: RATING_DESC) {
       edges {
         node {
-          id
-          nodeId
-          movieId
-          title
-          body
-          rating
-          userByUserReviewerId {
-            id
-            name
-          }
+          ...MovieReviewFrag
         }
       }
     }
@@ -36,16 +40,7 @@ mutation CreateMovieReview($input: CreateMovieReviewInput!) {
   createMovieReview(input: $input) {
     clientMutationId
     movieReview {
-      id
-      nodeId
-      movieId
-      title
-      body
-      rating
-      userByUserReviewerId {
-        id
-        name
-      }
+      ...MovieReviewFrag
     }
   }
 }
@@ -54,16 +49,7 @@ mutation UpdateMovieReview($input: UpdateMovieReviewInput!) {
   updateMovieReview(input: $input) {
     clientMutationId
     movieReview {
-      id
-      nodeId
-      movieId
-      title
-      body
-      rating
-      userByUserReviewerId {
-        id
-        name
-      }
+      ...MovieReviewFrag
     }
   }
 }
