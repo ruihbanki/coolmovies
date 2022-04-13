@@ -9,6 +9,9 @@ import {
   CreateMovieReviewMutationVariables,
   MovieAndReviewsDocument,
   MovieAndReviewsQuery,
+  UpdateMovieReviewDocument,
+  UpdateMovieReviewMutationResult,
+  UpdateMovieReviewMutationVariables,
 } from "./movie.generated";
 import { movieActions, MovieAction } from "./movie.slice";
 
@@ -66,4 +69,36 @@ export const createMovieReviewEpic: Epic = (
     })
   );
 
-export const movieEpics = combineEpics(fetchMoviesEpic, createMovieReviewEpic);
+export const updateMovieReviewEpic: Epic = (
+  action$: Observable<MovieAction["updateReview"]>,
+  state$: StateObservable<RootState>,
+  { client }: EpicDependencies
+) =>
+  action$.pipe(
+    filter(movieActions.updateReview.match),
+    switchMap(async (action) => {
+      try {
+        const result = await client.mutate<
+          UpdateMovieReviewMutationResult["data"],
+          UpdateMovieReviewMutationVariables
+        >({
+          mutation: UpdateMovieReviewDocument,
+          variables: {
+            input: action.payload.data,
+          },
+        });
+        const movieReview = result?.data?.updateMovieReview?.movieReview;
+        return movieActions.updateReviewSuccess({
+          data: movieReview,
+        });
+      } catch (err: any) {
+        return movieActions.updateReviewError(err.message);
+      }
+    })
+  );
+
+export const movieEpics = combineEpics(
+  fetchMoviesEpic,
+  createMovieReviewEpic,
+  updateMovieReviewEpic
+);

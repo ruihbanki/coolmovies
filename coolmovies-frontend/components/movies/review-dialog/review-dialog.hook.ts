@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Review, ReviewDialogProps } from "./review-dialog";
 
 const EMPTY_REVIEW = {
@@ -40,6 +40,12 @@ export const useReviewDialog = (props: ReviewDialogProps) => {
   const resetForm = () => {
     setForm(EMPTY_REVIEW);
   };
+
+  useEffect(() => {
+    if (review) {
+      setForm(review);
+    }
+  }, [review]);
 
   return {
     changeBody,

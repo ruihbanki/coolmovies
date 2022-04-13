@@ -1,6 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { MovieReviewInput } from "../../../graphql-generated/types";
-import { MovieCreated } from "../movies.types";
+import {
+  MovieReviewInput,
+  UpdateMovieReviewInput,
+} from "../../../graphql-generated/types";
+import { MovieReviewCreated, MovieReviewUpdated } from "../movies.types";
 import { sortMovieReviewByRating } from "./movie.helpers";
 import { MovieAndReviews } from "./movie.types";
 
@@ -38,7 +41,7 @@ export const slice = createSlice({
     ) => {},
     createReviewSuccess: (
       state,
-      action: PayloadAction<{ data: MovieCreated }>
+      action: PayloadAction<{ data: MovieReviewCreated }>
     ) => {
       if (state.movie) {
         const reviews = state.movie?.movieReviewsByMovieId.edges!;
@@ -51,6 +54,33 @@ export const slice = createSlice({
       state.activeMovieReviewId = undefined;
     },
     createReviewError: (state, action: PayloadAction<string>) => {
+      state.error = action.payload;
+    },
+    updateReview: (
+      state,
+      action: PayloadAction<{ data: UpdateMovieReviewInput }>
+    ) => {},
+    updateReviewSuccess: (
+      state,
+      action: PayloadAction<{ data: MovieReviewUpdated }>
+    ) => {
+      if (state.movie) {
+        let reviews = state.movie?.movieReviewsByMovieId.edges!;
+        reviews = reviews.map((review) => {
+          if (review.node?.id === action.payload.data?.id) {
+            return {
+              node: action.payload.data,
+            };
+          } else {
+            return review;
+          }
+        });
+        const reviewsSorted = reviews.sort(sortMovieReviewByRating);
+        state.movie.movieReviewsByMovieId.edges = reviewsSorted;
+      }
+      state.activeMovieReviewId = undefined;
+    },
+    updateReviewError: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
     },
   },

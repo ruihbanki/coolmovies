@@ -17,6 +17,7 @@ query MovieAndReviews($nodeId: ID!) {
       edges {
         node {
           id
+          nodeId
           movieId
           title
           body
@@ -36,6 +37,7 @@ mutation CreateMovieReview($input: CreateMovieReviewInput!) {
     clientMutationId
     movieReview {
       id
+      nodeId
       movieId
       title
       body
@@ -53,6 +55,7 @@ mutation UpdateMovieReview($input: UpdateMovieReviewInput!) {
     clientMutationId
     movieReview {
       id
+      nodeId
       movieId
       title
       body

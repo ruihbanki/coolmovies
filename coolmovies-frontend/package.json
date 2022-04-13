@@ -34,6 +34,7 @@
     "@graphql-codegen/typescript": "2.4.8",
     "@graphql-codegen/typescript-operations": "2.3.5",
     "@graphql-codegen/typescript-react-apollo": "3.2.11",
+    "@svgr/webpack": "^6.2.1",
     "@types/node": "16.11.13",
     "@types/react": "17.0.37",
     "eslint": "8.4.1",

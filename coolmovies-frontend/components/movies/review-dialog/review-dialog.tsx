@@ -14,13 +14,13 @@ import { useReviewDialog } from "./review-dialog.hook";
 
 export interface Review {
   title: string;
-  body: string;
-  rating: number;
+  body?: string | null;
+  rating?: number | null;
 }
 
 export interface ReviewDialogProps {
   open: boolean;
-  review?: Review;
+  review?: Review | null;
   onClose: () => void;
   onSave: (review: Review) => void;
 }

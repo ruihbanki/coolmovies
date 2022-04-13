@@ -4,6 +4,7 @@ import {
   Box,
   Button,
   Grid,
+  IconButton,
   List,
   ListItem,
   ListItemAvatar,
@@ -14,34 +15,36 @@ import {
 import type { NextPage } from "next";
 import Image from "next/image";
 import MainLayout from "../../../components/layouts/main-layout";
-import { useMovie } from "./movie.hooks";
 import ReviewDialog from "../../../components/movies/review-dialog";
+import EditSvg from "../../../public/edit.svg";
+import { useMovie } from "./movie.hooks";
 
 const Movie: NextPage = () => {
   const {
+    activeReview,
     addNewReview,
+    canReview,
     closeReview,
+    editReview,
     movie,
     reviewOpen,
     saveReview,
     releaseDate,
   } = useMovie();
 
-  if (!movie) {
-    return null;
-  }
-
   return (
     <>
       <MainLayout contentBackgroundImage={movie?.imgUrl}>
         <Grid container spacing={4} alignItems="flex-end">
           <Grid item>
-            <Image
-              src={movie.imgUrl}
-              width={200}
-              height={300}
-              alt="Movie image"
-            />
+            {movie?.imgUrl && (
+              <Image
+                src={movie.imgUrl}
+                width={200}
+                height={300}
+                alt="Movie image"
+              />
+            )}
           </Grid>
           <Grid item>
             <Typography variant="body2">
@@ -98,6 +101,15 @@ const Movie: NextPage = () => {
                       {node?.title}
                     </Typography>
                     <Rating value={node?.rating} readOnly size="small" />
+                    {canReview(node) && (
+                      <IconButton
+                        color="primary"
+                        sx={{ ml: 1 }}
+                        onClick={() => editReview(node?.id)}
+                      >
+                        <EditSvg fill="currentColor" />
+                      </IconButton>
+                    )}
                   </Box>
                 }
                 secondary={node?.body}
@@ -110,6 +122,7 @@ const Movie: NextPage = () => {
         open={reviewOpen}
         onClose={closeReview}
         onSave={saveReview}
+        review={activeReview}
       />
     </>
   );

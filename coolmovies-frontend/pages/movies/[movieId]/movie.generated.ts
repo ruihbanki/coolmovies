@@ -8,21 +8,21 @@ export type MovieAndReviewsQueryVariables = Types.Exact<{
 }>;
 
 
-export type MovieAndReviewsQuery = { __typename?: 'Query', movie?: { __typename?: 'Movie', id: any, nodeId: string, title: string, releaseDate: any, imgUrl: string, userByUserCreatorId?: { __typename?: 'User', id: any, name: string } | null, movieDirectorByMovieDirectorId?: { __typename?: 'MovieDirector', id: any, name: string } | null, movieReviewsByMovieId: { __typename?: 'MovieReviewsConnection', edges: Array<{ __typename?: 'MovieReviewsEdge', node?: { __typename?: 'MovieReview', id: any, movieId: any, title: string, body?: string | null, rating?: number | null, userByUserReviewerId?: { __typename?: 'User', id: any, name: string } | null } | null }> } } | null };
+export type MovieAndReviewsQuery = { __typename?: 'Query', movie?: { __typename?: 'Movie', id: any, nodeId: string, title: string, releaseDate: any, imgUrl: string, userByUserCreatorId?: { __typename?: 'User', id: any, name: string } | null, movieDirectorByMovieDirectorId?: { __typename?: 'MovieDirector', id: any, name: string } | null, movieReviewsByMovieId: { __typename?: 'MovieReviewsConnection', edges: Array<{ __typename?: 'MovieReviewsEdge', node?: { __typename?: 'MovieReview', id: any, nodeId: string, movieId: any, title: string, body?: string | null, rating?: number | null, userByUserReviewerId?: { __typename?: 'User', id: any, name: string } | null } | null }> } } | null };
 
 export type CreateMovieReviewMutationVariables = Types.Exact<{
   input: Types.CreateMovieReviewInput;
 }>;
 
 
-export type CreateMovieReviewMutation = { __typename?: 'Mutation', createMovieReview?: { __typename?: 'CreateMovieReviewPayload', clientMutationId?: string | null, movieReview?: { __typename?: 'MovieReview', id: any, movieId: any, title: string, body?: string | null, rating?: number | null, userByUserReviewerId?: { __typename?: 'User', id: any, name: string } | null } | null } | null };
+export type CreateMovieReviewMutation = { __typename?: 'Mutation', createMovieReview?: { __typename?: 'CreateMovieReviewPayload', clientMutationId?: string | null, movieReview?: { __typename?: 'MovieReview', id: any, nodeId: string, movieId: any, title: string, body?: string | null, rating?: number | null, userByUserReviewerId?: { __typename?: 'User', id: any, name: string } | null } | null } | null };
 
 export type UpdateMovieReviewMutationVariables = Types.Exact<{
   input: Types.UpdateMovieReviewInput;
 }>;
 
 
-export type UpdateMovieReviewMutation = { __typename?: 'Mutation', updateMovieReview?: { __typename?: 'UpdateMovieReviewPayload', clientMutationId?: string | null, movieReview?: { __typename?: 'MovieReview', id: any, movieId: any, title: string, body?: string | null, rating?: number | null, userByUserReviewerId?: { __typename?: 'User', id: any, name: string } | null } | null } | null };
+export type UpdateMovieReviewMutation = { __typename?: 'Mutation', updateMovieReview?: { __typename?: 'UpdateMovieReviewPayload', clientMutationId?: string | null, movieReview?: { __typename?: 'MovieReview', id: any, nodeId: string, movieId: any, title: string, body?: string | null, rating?: number | null, userByUserReviewerId?: { __typename?: 'User', id: any, name: string } | null } | null } | null };
 
 
 export const MovieAndReviewsDocument = gql`
@@ -45,6 +45,7 @@ export const MovieAndReviewsDocument = gql`
       edges {
         node {
           id
+          nodeId
           movieId
           title
           body
@@ -93,6 +94,7 @@ export const CreateMovieReviewDocument = gql`
     clientMutationId
     movieReview {
       id
+      nodeId
       movieId
       title
       body
@@ -137,6 +139,7 @@ export const UpdateMovieReviewDocument = gql`
     clientMutationId
     movieReview {
       id
+      nodeId
       movieId
       title
       body

@@ -1,7 +1,10 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { format } from "date-fns";
-import { MovieReviewInput } from "../../../graphql-generated/types";
+import {
+  MovieReviewInput,
+  UpdateMovieReviewInput,
+} from "../../../graphql-generated/types";
 import { useAppDispatch, useAppSelector } from "../../../redux";
 import { Review } from "../../../components/movies/review-dialog/review-dialog";
 import { movieActions } from "./movie.slice";
@@ -17,6 +20,12 @@ export const useMovie = () => {
 
   const movie = useAppSelector((state) => state.movie.movie);
 
+  const activeReview = useAppSelector((state) => {
+    return state.movie.movie?.movieReviewsByMovieId.edges.find((edge) => {
+      return edge?.node?.id === state.movie.activeMovieReviewId;
+    })?.node;
+  });
+
   const activeMovieReviewId = useAppSelector(
     (state) => state.movie.activeMovieReviewId
   );
@@ -25,21 +34,47 @@ export const useMovie = () => {
     dispatch(movieActions.setActiveMovieReviewId("NEW"));
   };
 
+  const editReview = (id: string) => {
+    dispatch(movieActions.setActiveMovieReviewId(id));
+  };
+
   const closeReview = () => {
     dispatch(movieActions.setActiveMovieReviewId(undefined));
   };
 
   const saveReview = (review: Review) => {
-    const reviewInput: MovieReviewInput = {
-      ...review,
-      movieId: movie?.id,
-      userReviewerId: LOGGED_USER_ID,
-    };
-    dispatch(
-      movieActions.createReview({
-        review: reviewInput,
-      })
-    );
+    if (activeReview) {
+      const reviewInput: UpdateMovieReviewInput = {
+        nodeId: activeReview.nodeId,
+        movieReviewPatch: {
+          rating: review.rating,
+          title: review.title,
+          body: review.body,
+        },
+      };
+      dispatch(
+        movieActions.updateReview({
+          data: reviewInput,
+        })
+      );
+    } else {
+      const reviewInput: MovieReviewInput = {
+        ...review,
+        movieId: movie?.id,
+        userReviewerId: LOGGED_USER_ID,
+      };
+      dispatch(
+        movieActions.createReview({
+          review: reviewInput,
+        })
+      );
+    }
+  };
+
+  const canReview = (
+    review?: { userByUserReviewerId?: { id: string } | null } | null
+  ) => {
+    return review?.userByUserReviewerId?.id === LOGGED_USER_ID;
   };
 
   useEffect(() => {
@@ -63,8 +98,11 @@ export const useMovie = () => {
     : "";
 
   return {
+    activeReview,
     addNewReview,
+    canReview,
     closeReview,
+    editReview,
     movie,
     reviewOpen,
     saveReview,
