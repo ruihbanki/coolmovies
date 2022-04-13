@@ -71,6 +71,10 @@ export const useMovie = () => {
     }
   };
 
+  const goBack = () => {
+    router.back();
+  };
+
   const canReview = (
     review?: { userByUserReviewerId?: { id: string } | null } | null
   ) => {
@@ -103,6 +107,7 @@ export const useMovie = () => {
     canReview,
     closeReview,
     editReview,
+    goBack,
     movie,
     reviewOpen,
     saveReview,

@@ -14,6 +14,7 @@ import {
 } from "@mui/material";
 import type { NextPage } from "next";
 import Image from "next/image";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import MainLayout from "../../../components/layouts/main-layout";
 import ReviewDialog from "../../../components/movies/review-dialog";
 import EditSvg from "../../../public/edit.svg";
@@ -26,6 +27,7 @@ const Movie: NextPage = () => {
     canReview,
     closeReview,
     editReview,
+    goBack,
     movie,
     reviewOpen,
     saveReview,
@@ -35,6 +37,9 @@ const Movie: NextPage = () => {
   return (
     <>
       <MainLayout contentBackgroundImage={movie?.imgUrl}>
+        <IconButton color="primary" sx={{ p: 0, mb: 2 }} onClick={goBack}>
+          <ArrowBackIcon fontSize="large" />
+        </IconButton>
         <Grid container spacing={4} alignItems="flex-end">
           <Grid item>
             {movie?.imgUrl && (
