@@ -41,7 +41,7 @@ export const MovieAndReviewsDocument = gql`
       id
       name
     }
-    movieReviewsByMovieId {
+    movieReviewsByMovieId(orderBy: RATING_DESC) {
       edges {
         node {
           id
