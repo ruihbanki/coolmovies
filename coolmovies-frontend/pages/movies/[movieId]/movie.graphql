@@ -34,11 +34,33 @@ query MovieAndReviews($nodeId: ID!) {
 mutation CreateMovieReview($input: CreateMovieReviewInput!) {
   createMovieReview(input: $input) {
     clientMutationId
+    movieReview {
+      id
+      movieId
+      title
+      body
+      rating
+      userByUserReviewerId {
+        id
+        name
+      }
+    }
   }
 }
 
 mutation UpdateMovieReview($input: UpdateMovieReviewInput!) {
   updateMovieReview(input: $input) {
     clientMutationId
+    movieReview {
+      id
+      movieId
+      title
+      body
+      rating
+      userByUserReviewerId {
+        id
+        name
+      }
+    }
   }
 }

@@ -3,7 +3,10 @@ import { useEffect } from "react";
 import { format } from "date-fns";
 import { MovieReviewInput } from "../../../graphql-generated/types";
 import { useAppDispatch, useAppSelector } from "../../../redux";
+import { Review } from "../../../components/movies/review-dialog/review-dialog";
 import { movieActions } from "./movie.slice";
+
+const LOGGED_USER_ID = "5f1e6707-7c3a-4acd-b11f-fd96096abd5a";
 
 export const useMovie = () => {
   const dispatch = useAppDispatch();
@@ -29,8 +32,8 @@ export const useMovie = () => {
   const saveReview = (review: Review) => {
     const reviewInput: MovieReviewInput = {
       ...review,
-      movieId,
-      userReviewerId: "5f1e6707-7c3a-4acd-b11f-fd96096abd5a",
+      movieId: movie?.id,
+      userReviewerId: LOGGED_USER_ID,
     };
     dispatch(
       movieActions.createReview({

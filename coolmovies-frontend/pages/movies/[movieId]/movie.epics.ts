@@ -5,7 +5,7 @@ import { RootState } from "../../../redux/store";
 import { EpicDependencies } from "../../../redux/types";
 import {
   CreateMovieReviewDocument,
-  CreateMovieReviewMutationFn,
+  CreateMovieReviewMutationResult,
   CreateMovieReviewMutationVariables,
   MovieAndReviewsDocument,
   MovieAndReviewsQuery,
@@ -46,7 +46,7 @@ export const createMovieReviewEpic: Epic = (
     switchMap(async (action) => {
       try {
         const result = await client.mutate<
-          CreateMovieReviewMutationFn,
+          CreateMovieReviewMutationResult["data"],
           CreateMovieReviewMutationVariables
         >({
           mutation: CreateMovieReviewDocument,
@@ -56,11 +56,12 @@ export const createMovieReviewEpic: Epic = (
             },
           },
         });
-        // return movieActions.fetchSuccess({
-        //   data: result.data,
-        // });
+        const movieReview = result?.data?.createMovieReview?.movieReview;
+        return movieActions.createReviewSuccess({
+          data: movieReview,
+        });
       } catch (err: any) {
-        return movieActions.fetchError(err.message);
+        return movieActions.createReviewError(err.message);
       }
     })
   );

@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { MovieReviewInput } from "../../../graphql-generated/types";
+import { MovieCreated } from "../movies.types";
 import { MovieAndReviews } from "./movie.types";
 
 interface MovieState {
@@ -36,9 +37,15 @@ export const slice = createSlice({
     ) => {},
     createReviewSuccess: (
       state,
-      action: PayloadAction<{ review: MovieReviewInput }>
+      action: PayloadAction<{ data: MovieCreated }>
     ) => {
-      alert(1111);
+      state.movie?.movieReviewsByMovieId.edges.unshift({
+        node: action.payload.data,
+      });
+      state.activeMovieReviewId = undefined;
+    },
+    createReviewError: (state, action: PayloadAction<string>) => {
+      state.error = action.payload;
     },
   },
 });

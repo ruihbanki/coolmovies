@@ -15,14 +15,14 @@ export type CreateMovieReviewMutationVariables = Types.Exact<{
 }>;
 
 
-export type CreateMovieReviewMutation = { __typename?: 'Mutation', createMovieReview?: { __typename?: 'CreateMovieReviewPayload', clientMutationId?: string | null } | null };
+export type CreateMovieReviewMutation = { __typename?: 'Mutation', createMovieReview?: { __typename?: 'CreateMovieReviewPayload', clientMutationId?: string | null, movieReview?: { __typename?: 'MovieReview', id: any, movieId: any, title: string, body?: string | null, rating?: number | null, userByUserReviewerId?: { __typename?: 'User', id: any, name: string } | null } | null } | null };
 
 export type UpdateMovieReviewMutationVariables = Types.Exact<{
   input: Types.UpdateMovieReviewInput;
 }>;
 
 
-export type UpdateMovieReviewMutation = { __typename?: 'Mutation', updateMovieReview?: { __typename?: 'UpdateMovieReviewPayload', clientMutationId?: string | null } | null };
+export type UpdateMovieReviewMutation = { __typename?: 'Mutation', updateMovieReview?: { __typename?: 'UpdateMovieReviewPayload', clientMutationId?: string | null, movieReview?: { __typename?: 'MovieReview', id: any, movieId: any, title: string, body?: string | null, rating?: number | null, userByUserReviewerId?: { __typename?: 'User', id: any, name: string } | null } | null } | null };
 
 
 export const MovieAndReviewsDocument = gql`
@@ -91,6 +91,17 @@ export const CreateMovieReviewDocument = gql`
     mutation CreateMovieReview($input: CreateMovieReviewInput!) {
   createMovieReview(input: $input) {
     clientMutationId
+    movieReview {
+      id
+      movieId
+      title
+      body
+      rating
+      userByUserReviewerId {
+        id
+        name
+      }
+    }
   }
 }
     `;
@@ -124,6 +135,17 @@ export const UpdateMovieReviewDocument = gql`
     mutation UpdateMovieReview($input: UpdateMovieReviewInput!) {
   updateMovieReview(input: $input) {
     clientMutationId
+    movieReview {
+      id
+      movieId
+      title
+      body
+      rating
+      userByUserReviewerId {
+        id
+        name
+      }
+    }
   }
 }
     `;
