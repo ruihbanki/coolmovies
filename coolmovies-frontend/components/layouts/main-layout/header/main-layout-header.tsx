@@ -8,7 +8,7 @@ const MainLayoutHeader = (props: MainLayoutHeaderProps) => {
   return (
     <StyledRoot className={classes.root}>
       <div className={classes.title}>
-        <Typography variant="body1">MOVIE APP</Typography>
+        <Typography variant="body1">COOLMOVIES</Typography>
       </div>
       <div className={classes.search}>
         <Search className={classes.searchIcon} />
