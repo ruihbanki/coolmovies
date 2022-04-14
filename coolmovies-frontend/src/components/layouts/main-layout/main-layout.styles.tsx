@@ -14,12 +14,17 @@ export const StyledRoot = styled("div")<{ contentBackgroundImage?: string }>(
     width: "100vw",
     height: "100vh",
     [`& > .${classes.header}`]: {
-      flex: "0 0 44px",
+      flex: "0 0 48px",
+      position: "fixed",
+      left: 0,
+      right: 0,
+      height: 48,
+      zIndex: 1,
     },
     [`& > .${classes.content}`]: {
       flex: 1,
       position: "relative",
-      padding: 40,
+      padding: "88px 40px 40px 40px",
       background: theme.palette.grey[900],
       "*": {
         position: "relative",
@@ -28,7 +33,7 @@ export const StyledRoot = styled("div")<{ contentBackgroundImage?: string }>(
         content: "''",
         position: "absolute",
         inset: 0,
-        bottom: "30%",
+        height: "80vh",
         backgroundImage: contentBackgroundImage
           ? `url(${contentBackgroundImage})`
           : undefined,

@@ -37,7 +37,7 @@ const Movie: NextPage = () => {
   return (
     <>
       <MainLayout contentBackgroundImage={movie?.imgUrl}>
-        <IconButton color="primary" sx={{ p: 0, mb: 2 }} onClick={goBack}>
+        <IconButton color="primary" sx={{ mb: 2, border: 1 }} onClick={goBack}>
           <ArrowBackIcon fontSize="large" />
         </IconButton>
         <Grid container spacing={4} alignItems="flex-end">
