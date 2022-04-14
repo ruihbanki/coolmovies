@@ -1,4 +1,3 @@
-import { Search } from "@mui/icons-material";
 import { Avatar, Input, Typography } from "@mui/material";
 import { StyledRoot, classes } from "./main-layout-header.styles";
 
@@ -11,7 +10,6 @@ const MainLayoutHeader = (props: MainLayoutHeaderProps) => {
         <Typography variant="body1">COOLMOVIES</Typography>
       </div>
       <div className={classes.search}>
-        {/* <Search className={classes.searchIcon} /> */}
         <Input
           type="text"
           className={classes.searchInput}

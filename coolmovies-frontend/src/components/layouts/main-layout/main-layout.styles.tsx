@@ -24,7 +24,7 @@ export const StyledRoot = styled("div")<{ contentBackgroundImage?: string }>(
     [`& > .${classes.content}`]: {
       flex: 1,
       position: "relative",
-      padding: "88px 40px 40px 40px",
+      padding: "64px 16px 16px 16px",
       background: theme.palette.grey[900],
       "*": {
         position: "relative",
@@ -42,6 +42,9 @@ export const StyledRoot = styled("div")<{ contentBackgroundImage?: string }>(
         opacity: 0.2,
         filter: "blur(10px) grayscale(0.5)",
         maskImage: "linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0))",
+      },
+      [theme.breakpoints.up("md")]: {
+        padding: "88px 40px 40px 40px",
       },
     },
   })
