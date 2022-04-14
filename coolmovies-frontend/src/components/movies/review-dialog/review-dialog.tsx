@@ -49,12 +49,17 @@ const ReviewDialog = (props: ReviewDialogProps) => {
       <DialogContent>
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <Rating size="large" value={form.rating} onChange={changeRating} />
+            <Rating
+              size="large"
+              value={form.rating}
+              onChange={changeRating}
+              aria-label="Rating"
+            />
           </Grid>
           <Grid item xs={12}>
             <TextField
               fullWidth
-              label="title"
+              label="Title"
               value={form.title}
               onChange={changeTitle}
             />

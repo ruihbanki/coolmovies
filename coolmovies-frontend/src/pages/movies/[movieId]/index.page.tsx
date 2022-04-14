@@ -37,7 +37,7 @@ const Movie: NextPage = () => {
   return (
     <>
       <MainLayout contentBackgroundImage={movie?.imgUrl}>
-        <IconButton color="primary" sx={{ mb: 2, border: 1 }} onClick={goBack}>
+        <IconButton color="primary" sx={{ mb: 4, border: 1 }} onClick={goBack}>
           <ArrowBackIcon fontSize="large" />
         </IconButton>
         <Grid container spacing={4} alignItems="flex-end">
@@ -111,6 +111,7 @@ const Movie: NextPage = () => {
                         color="primary"
                         sx={{ ml: 1 }}
                         onClick={() => editReview(node?.id)}
+                        aria-label="Edit"
                       >
                         <EditSvg fill="currentColor" />
                       </IconButton>

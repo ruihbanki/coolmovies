@@ -92,6 +92,8 @@ export const updateMovieReviewEpic: Epic = (
           data: movieReview,
         });
       } catch (err: any) {
+        console.log(err);
+
         return movieActions.updateReviewError(err.message);
       }
     })
