@@ -3,9 +3,12 @@ import {
   MovieReviewInput,
   UpdateMovieReviewInput,
 } from "../../../graphql-generated/types";
-import { MovieReviewCreated, MovieReviewUpdated } from "../movies.types";
 import { sortMovieReviewByRating } from "./movie.helpers";
-import { MovieAndReviews } from "./movie.types";
+import {
+  MovieAndReviews,
+  MovieReviewCreated,
+  MovieReviewUpdated,
+} from "./movie.types";
 
 interface MovieState {
   movie?: MovieAndReviews;

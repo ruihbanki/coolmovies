@@ -42,11 +42,12 @@ There are a couple of additional things that we would like to see in your submis
 
 ## Notes
 
-- I would like to use some tool to generate types from the graphql schema
+- I didn't have time to implement the search feature :(
 
 ## Fake US
 
-The ideia is to simulate a real project. The ideal will be to create and merge each one in separate branchs
+The ideia is to simulate a real project.
+The ideal will be to create and merge each one in separate PR.
 
 MOV-001 create the movies page
 MOV-002 create the movie page
