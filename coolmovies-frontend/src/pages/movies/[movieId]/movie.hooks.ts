@@ -17,6 +17,8 @@ export const useMovie = () => {
 
   const router = useRouter();
 
+  const mdUp = useBreakpoints("md");
+
   const movieId = router.query.movieId! as string;
 
   const movie = useAppSelector((state) => state.movie.movie);
@@ -113,5 +115,6 @@ export const useMovie = () => {
     releaseDate,
     reviewOpen,
     saveReview,
+    mdUp,
   };
 };

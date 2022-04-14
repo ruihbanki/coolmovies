@@ -10,3 +10,11 @@ export const sortMovieReviewByRating = (a: Rating, b: Rating) => {
   }
   return 0;
 };
+
+export const nameToLetters = (name?: string) => {
+  if (!name) {
+    return "?";
+  }
+  const parts = name.split(" ");
+  return parts.map((part) => part.substring(0, 1)).join("");
+};

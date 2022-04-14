@@ -19,6 +19,7 @@ import MainLayout from "../../../components/layouts/main-layout";
 import ReviewDialog from "../../../components/movies/review-dialog";
 import EditSvg from "../../../../public/edit.svg";
 import { useMovie } from "./movie.hooks";
+import { nameToLetters } from "./movie.helpers";
 
 const Movie: NextPage = () => {
   const {
@@ -32,6 +33,7 @@ const Movie: NextPage = () => {
     releaseDate,
     reviewOpen,
     saveReview,
+    mdUp,
   } = useMovie();
 
   return (
@@ -65,7 +67,7 @@ const Movie: NextPage = () => {
         </Grid>
         <Typography
           component="h1"
-          variant={{ xs: "h2", md: "h4" }}
+          variant={mdUp ? "h2" : "h4"}
           color="common.white"
           fontWeight={300}
           mt={{ xs: 2, md: 4 }}
@@ -89,9 +91,11 @@ const Movie: NextPage = () => {
                     border: 2,
                     borderStyle: "solid",
                     borderColor: "orange",
+                    background: "black",
+                    color: "white",
                   }}
                 >
-                  AA
+                  {nameToLetters(node?.userByUserReviewerId?.name)}
                 </Avatar>
               </ListItemAvatar>
               <ListItemText
