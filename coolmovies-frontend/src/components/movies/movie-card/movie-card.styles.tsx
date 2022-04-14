@@ -13,6 +13,9 @@ export const StyledRoot = styled("div")(({ theme }) => ({
   flexDirection: "column",
   [`& .${classes.image}`]: {
     display: "flex",
+    "&:hover": {
+      outline: `2px solid ${theme.palette.primary.main}`,
+    },
   },
   [`& .${classes.title}`]: {},
   [`& .${classes.date}`]: {},
