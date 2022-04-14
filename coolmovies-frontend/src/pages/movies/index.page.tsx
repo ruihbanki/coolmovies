@@ -1,11 +1,14 @@
-import { Typography, Grid, Box } from "@mui/material";
+import { Typography, Grid, Box, useMediaQuery } from "@mui/material";
 import type { NextPage } from "next";
 import MainLayout from "../../components/layouts/main-layout/main-layout";
 import MovieCard from "../../components/movies/movie-card/movie-card";
+import useBreakpoints from "../../hooks/use-breakpoints";
 import { useMovies } from "./movies.hooks";
 
 const Movies: NextPage = () => {
   const { movies } = useMovies();
+
+  const upMd = useBreakpoints("md");
 
   return (
     <MainLayout>
@@ -19,9 +22,14 @@ const Movies: NextPage = () => {
         Movies
       </Typography>
       <Box mt={2}>
-        <Grid container spacing={5}>
+        <Grid container spacing={{ xs: 2, md: 5 }}>
           {movies.map((movie) => (
-            <Grid key={movie?.id} item flex="0 0 240px">
+            <Grid
+              key={movie?.id}
+              item
+              flex={upMd ? "0 0 240px" : undefined}
+              xs={!upMd && 6}
+            >
               <MovieCard movie={movie} />
             </Grid>
           ))}
