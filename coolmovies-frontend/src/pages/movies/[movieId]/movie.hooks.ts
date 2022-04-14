@@ -8,6 +8,7 @@ import {
 import { useAppDispatch, useAppSelector } from "../../../redux";
 import { Review } from "../../../components/movies/review-dialog/review-dialog";
 import { movieActions } from "./movie.slice";
+import useBreakpoints from "../../../hooks/use-breakpoints";
 
 const LOGGED_USER_ID = "5f1e6707-7c3a-4acd-b11f-fd96096abd5a";
 
@@ -109,8 +110,8 @@ export const useMovie = () => {
     editReview,
     goBack,
     movie,
+    releaseDate,
     reviewOpen,
     saveReview,
-    releaseDate,
   };
 };

@@ -29,9 +29,9 @@ const Movie: NextPage = () => {
     editReview,
     goBack,
     movie,
+    releaseDate,
     reviewOpen,
     saveReview,
-    releaseDate,
   } = useMovie();
 
   return (
@@ -40,8 +40,8 @@ const Movie: NextPage = () => {
         <IconButton color="primary" sx={{ mb: 4, border: 1 }} onClick={goBack}>
           <ArrowBackIcon fontSize="large" />
         </IconButton>
-        <Grid container spacing={4} alignItems="flex-end">
-          <Grid item>
+        <Grid container spacing={{ xs: 2, md: 4 }} alignItems="flex-end">
+          <Grid item xs={5} md="auto">
             {movie?.imgUrl && (
               <Image
                 src={movie.imgUrl}
@@ -65,14 +65,14 @@ const Movie: NextPage = () => {
         </Grid>
         <Typography
           component="h1"
-          variant="h2"
+          variant={{ xs: "h2", md: "h4" }}
           color="common.white"
           fontWeight={300}
-          mt={4}
+          mt={{ xs: 2, md: 4 }}
         >
           {movie?.title}
         </Typography>
-        <Box display="flex" mt={6} alignItems="center">
+        <Box display="flex" mt={{ xs: 2, md: 6 }} alignItems="center">
           <Typography component="h2" variant="h6" color="common.white" mr={4}>
             Reviews
           </Typography>
@@ -96,7 +96,11 @@ const Movie: NextPage = () => {
               </ListItemAvatar>
               <ListItemText
                 primary={
-                  <Box display="flex" alignItems="center">
+                  <Box
+                    display="flex"
+                    alignItems={{ md: "center" }}
+                    flexDirection={{ xs: "column", md: "row" }}
+                  >
                     <Typography
                       component="span"
                       variant="body1"
@@ -105,17 +109,19 @@ const Movie: NextPage = () => {
                     >
                       {node?.title}
                     </Typography>
-                    <Rating value={node?.rating} readOnly size="small" />
-                    {canReview(node) && (
-                      <IconButton
-                        color="primary"
-                        sx={{ ml: 1 }}
-                        onClick={() => editReview(node?.id)}
-                        aria-label="Edit"
-                      >
-                        <EditSvg fill="currentColor" />
-                      </IconButton>
-                    )}
+                    <Box display="flex" alignItems="center">
+                      <Rating value={node?.rating} readOnly size="small" />
+                      {canReview(node) && (
+                        <IconButton
+                          color="primary"
+                          sx={{ ml: 1 }}
+                          onClick={() => editReview(node?.id)}
+                          aria-label="Edit"
+                        >
+                          <EditSvg fill="currentColor" />
+                        </IconButton>
+                      )}
+                    </Box>
                   </Box>
                 }
                 secondary={node?.body}
